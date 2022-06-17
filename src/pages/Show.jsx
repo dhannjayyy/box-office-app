@@ -5,6 +5,7 @@ import Cast from "../components/show/Cast";
 import Details from "../components/show/Details";
 import Seasons from "../components/show/Season";
 import ShowMainData from "../components/show/ShowMainData";
+import { InfoBlock, ShowPageWrapper } from "./show.styled";
 
 const initialState = {
   show: null,
@@ -60,7 +61,7 @@ const Show = () => {
   }, [id]);
 
   console.log(show);
-  
+
   if (isLoading) {
     return <div>Data is being loaded</div>;
   }
@@ -70,7 +71,7 @@ const Show = () => {
   }
 
   return (
-    <div>
+    <ShowPageWrapper>
       <ShowMainData
         image={show.image}
         name={show.name}
@@ -78,15 +79,23 @@ const Show = () => {
         summary={show.summary}
         tags={show.genres}
       />
-      <h2>Details</h2>
-      <Details status={show.status} network={show.network} premiered={show.premiered}/>
-
-      <h2>Season</h2> 
-      <Seasons seasons={show._embedded.seasons}/>
-
-      <h2>Cast</h2>
-      <Cast cast={show._embedded.cast}/>
-    </div>
+      <InfoBlock>
+        <h2>Details</h2>
+        <Details
+          status={show.status}
+          network={show.network}
+          premiered={show.premiered}
+        />
+      </InfoBlock>
+      <InfoBlock>
+        <h2>Season</h2>
+        <Seasons seasons={show._embedded.seasons} />
+      </InfoBlock>
+      <InfoBlock>
+        <h2>Cast</h2>
+        <Cast cast={show._embedded.cast} />
+      </InfoBlock>
+    </ShowPageWrapper>
   );
 };
 
