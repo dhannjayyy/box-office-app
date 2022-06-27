@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ActorGrid from "../components/actor/ActorGrid";
 import MainPageLayout from "../components/MainPageLayout";
+import { useLastQuery } from "../components/misc/custom-hooks";
 import GET_API from "../components/misc/getapi";
 import ShowGrid from "../components/show/ShowGrid";
 
 const Home = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useLastQuery();
   const [results, setResults] = useState(null);
   const [searchOption, setSearchOption] = useState("shows");
 
@@ -49,7 +50,7 @@ const Home = () => {
 
   return (
     <MainPageLayout>
-      <input type="text" onChange={onInputChange} onKeyDown={onEnter} placeholder="Search for something" />
+      <input type="text" onChange={onInputChange} onKeyDown={onEnter} value={input} placeholder="Search for something" />
       <div>
         <label htmlFor="shows-radio">
           Shows
