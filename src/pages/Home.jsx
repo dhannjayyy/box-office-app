@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import ActorGrid from "../components/actor/ActorGrid";
 import CustomRadio from "../components/CustomRadio";
 import MainPageLayout from "../components/MainPageLayout";
@@ -18,13 +18,17 @@ const Home = () => {
 
   const isSearchShows = searchOption === "shows";
 
-  const onInputChange = (el) => {
-    setInput(el.target.value);
-  };
+  const onInputChange = useCallback(
+    (el) => {
+     setInput(el.target.value);
+   },[setInput]
+  )
 
-  const onRadioChange = (ev) => {
-    setSearchOption(ev.target.value);
-  };
+  const onRadioChange = useCallback(
+    (ev) => {
+      setSearchOption(ev.target.value);
+    }, []
+  )
 
   const search = () => {
     GET_API(`/search/${searchOption}?q=${input}`).then((result) => {
